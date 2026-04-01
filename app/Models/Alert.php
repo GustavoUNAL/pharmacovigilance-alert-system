@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Alert extends Model
+{
+    protected $fillable = [
+        'customer_id',
+        'order_id',
+        'sent_at',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'sent_at' => 'datetime',
+        ];
+    }
+
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
+}
